@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class KafkaConsumer {
+    private static final String TOPIC = "src-topic";
 //    @KafkaListener(topics = "test", groupId = "groupId-app", topicPartitions = @TopicPartition(topic = "test",
 //            partitionOffsets = {
 //                    @PartitionOffset(partition = "0", initialOffset = "0")
@@ -21,8 +22,7 @@ public class KafkaConsumer {
 //        log.info("Received message in group: " + message + " from partition: " + partition);
 //    }
 
-    @KafkaListener(
-            topics = "test", groupId = "groupId-json")
+    @KafkaListener(topics = TOPIC, groupId = "groupId-json")
     public void greetingListener(User user) {
         log.info(user.toString());
     }

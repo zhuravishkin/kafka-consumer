@@ -26,69 +26,53 @@ public class KafkaConsumerConfig {
 //    @Bean
 //    public ConsumerFactory<String, String> consumerFactory() {
 //        Map<String, Object> props = new HashMap<>();
-//        props.put(
-//                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-//                bootstrapAddress);
-//        props.put(
-//                ConsumerConfig.GROUP_ID_CONFIG,
-//                "groupId-app");
-//        props.put(
-//                ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-//                StringDeserializer.class);
-//        props.put(
-//                ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-//                StringDeserializer.class);
+//        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+//        props.put(ConsumerConfig.GROUP_ID_CONFIG, "groupId-app");
+//        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+//        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+//
 //        return new DefaultKafkaConsumerFactory<>(props);
 //    }
 
     @Bean
     public ConsumerFactory<String, User> objectConsumerFactory() {
         JsonDeserializer<User> jsonDeserializer = new JsonDeserializer<>(User.class);
-//        jsonDeserializer.setRemoveTypeHeaders(false);
-//        jsonDeserializer.addTrustedPackages("*");
+        jsonDeserializer.setRemoveTypeHeaders(false);
+        jsonDeserializer.addTrustedPackages("*");
         jsonDeserializer.setUseTypeMapperForKey(true);
         Map<String, Object> props = new HashMap<>();
-        props.put(
-                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                bootstrapAddress);
-        props.put(
-                ConsumerConfig.GROUP_ID_CONFIG,
-                "groupId-json");
-        props.put(
-                ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-                StringDeserializer.class);
-        props.put(
-                ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-                JsonDeserializer.class);
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "groupId-json");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), jsonDeserializer);
     }
 
 //    @Bean
-//    public ConcurrentKafkaListenerContainerFactory<String, String>
-//    kafkaListenerContainerFactory() {
+//    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
 //        ConcurrentKafkaListenerContainerFactory<String, String> factory =
 //                new ConcurrentKafkaListenerContainerFactory<>();
 //        factory.setConsumerFactory(consumerFactory());
+//
 //        return factory;
 //    }
 //
 //    @Bean
-//    public ConcurrentKafkaListenerContainerFactory<String, String>
-//    filterKafkaListenerContainerFactory() {
+//    public ConcurrentKafkaListenerContainerFactory<String, String> filterKafkaListenerContainerFactory() {
 //        ConcurrentKafkaListenerContainerFactory<String, String> factory =
 //                new ConcurrentKafkaListenerContainerFactory<>();
 //        factory.setConsumerFactory(consumerFactory());
-//        factory.setRecordFilterStrategy(
-//                record -> record.value().contains("app"));
+//        factory.setRecordFilterStrategy(record -> record.value().contains("app"));
+//
 //        return factory;
 //    }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, User>
-    kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, User> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, User> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, User> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(objectConsumerFactory());
+
         return factory;
     }
 }
