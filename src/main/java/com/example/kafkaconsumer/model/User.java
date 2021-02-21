@@ -1,16 +1,24 @@
 package com.example.kafkaconsumer.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @ToString
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
-    private String message;
+    @JsonProperty("phone_number")
+    private String phoneNumber;
 
-    private String name;
+    @JsonProperty("first_name")
+    private String firstName;
 
-    private Integer age;
+    @JsonProperty("sur_name")
+    private String surName;
+
+    @JsonProperty("balance")
+    private Integer balance;
+
+    @JsonProperty("event_time")
+    private Long eventTime;
 }
