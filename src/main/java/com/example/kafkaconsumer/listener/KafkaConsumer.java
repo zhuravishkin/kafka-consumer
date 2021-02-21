@@ -9,15 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaConsumer {
     private static final String TOPIC = "src-topic";
-//    @KafkaListener(topics = "test", groupId = "groupId-app", topicPartitions = @TopicPartition(topic = "test",
-//            partitionOffsets = {
-//                    @PartitionOffset(partition = "0", initialOffset = "0")
-//            }))
+
+//    @KafkaListener(topics = TOPIC, groupId = "groupId-app", topicPartitions = @TopicPartition(topic = TOPIC,
+//            partitionOffsets = {@PartitionOffset(partition = "0", initialOffset = "0")}))
 //    public void listen(@Payload String message, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
 //        log.info("Received message in group: " + message + " from partition: " + partition);
 //    }
-
-//    @KafkaListener(topics = "test", groupId = "groupId-app", containerFactory = "filterKafkaListenerContainerFactory")
+//
+//    @KafkaListener(topics = TOPIC, groupId = "groupId-app", containerFactory = "filterKafkaListenerContainerFactory")
 //    public void listen(@Payload String message, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
 //        log.info("Received message in group: " + message + " from partition: " + partition);
 //    }
