@@ -16,6 +16,6 @@ class KafkaConsumerTest {
 
     @Test
     void greetingListener() {
-        kafkaConsumer.greetingListener(new User());
+        kafkaConsumer.consume(new User(), "key", 0, "src", 1);
     }
 }
